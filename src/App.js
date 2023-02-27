@@ -17,7 +17,7 @@ function App() {
 
   //setting states for the taskList
   const [tasksList, updateList] = useState([]);
-
+  const [temporaryStorage, setTemporaryStorage] = useState([]);
   const todo = { id: counter, task: task, date: date, time: time };
 
   //adding event listener functions for data entry
@@ -26,17 +26,22 @@ function App() {
     affected.id === 'task' ? setTask(affected.value) : affected.id === 'date' ? setDate(affected.value) : setTime(affected.value);
   }
 
-
-  const handleQuery = (event)=>{
-    event.preventDefault()
-    setQuery(event.target.value);
-    query.length ? updateList(tasksList): updateList(tasksList.filter(task=>((task.task).toLowerCase()).includes(query.toLowerCase())))
-}
-
   const handleTaskForm = (event) => {
     setDisplayForm(true);
     setToggleDisplay('d-none')
   };
+
+  const handleQuery = (event) => {
+    setQuery(event.target.value);
+    console.log(event)
+    updateList(tasksList.filter(task => ((task.task).toLowerCase()).includes(query.toLowerCase())))
+   
+  }
+  const clearQuery = (event)=>{
+    event.preventDefault()
+    setQuery('')
+    updateList(temporaryStorage)
+  }
 
   //adding event listener functions for form submission
   const submitTask = (event) => {
@@ -45,14 +50,16 @@ function App() {
 
     holderList.push(todo);
     updateList(holderList);
+    setTemporaryStorage(holderList);
     setCounter(counter + 1);
     setTask(''); setDate(''); setTime('');
   }
 
+
   return (
     <div className="App">
-      <Navbar tasksList={tasksList} updateList={updateList} query={query} handleQuery={handleQuery}></Navbar>
-      <CreateTasks task={task} date={date} time={time} handleTask={handleTask} submitTask={submitTask} tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} displayForm={displayForm} toggleDisplay={toggleDisplay}/>
+      <Navbar tasksList={tasksList} updateList={updateList} query={query} handleQuery={handleQuery} clearQuery={clearQuery}></Navbar>
+      <CreateTasks task={task} date={date} time={time} handleTask={handleTask} submitTask={submitTask} tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} displayForm={displayForm} toggleDisplay={toggleDisplay} />
     </div>
   );
 }
