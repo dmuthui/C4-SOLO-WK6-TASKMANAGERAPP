@@ -1,13 +1,13 @@
 import ListTasks from "./ListTasks";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaPlus } from "react-icons/fa";
 
-export default function Table({tasksList,updateList}) {
-    
+export default function Table({ tasksList, updateList, handleTaskForm, toggleDisplay }) {
+
     return (
-        <table className="my-3 table table-secondary table-striped table-hover">
+        tasksList.length ? <table className="my-3 table table-secondary table-striped table-hover">
             <thead>
                 <tr>
-                    
                     <th scope="col">TASK</th>
                     <th scope="col">DATE</th>
                     <th scope="col">TIME (Hrs)</th>
@@ -15,8 +15,13 @@ export default function Table({tasksList,updateList}) {
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-                {tasksList.map((task) => <ListTasks key={task.id} counter={task.id} task={task.Task} date={task.Date} time={task.Time} tasksList={tasksList} updateList={updateList}></ListTasks>)}
+                {tasksList.map((task) => <ListTasks key={task.id} counter={task.id} task={task.task} date={task.date} time={task.time} tasksList={tasksList} updateList={updateList}></ListTasks>)}
             </tbody>
-        </table>
+        </table> 
+        : 
+        <div id="messageHolder" className={toggleDisplay}>
+            <h1 className="my-5 lead display-1">You currently have no tasks scheduled!</h1>
+            <button onClick={()=>{handleTaskForm()}} type="button" className="btn btn-lg btn-dark toggleForm">Add Tasks <FaPlus className="my-2"/></button>
+        </div>
     )
 }
