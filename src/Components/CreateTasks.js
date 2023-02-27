@@ -3,7 +3,7 @@ import TaskForm from "./TaskForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CreateTasks(props) {
-   const  {task, date, time, handleTask, submitTask, tasksList, updateList, handleTaskForm, displayForm, toggleDisplay} = props;
+   const  {task, date, time, handleTask, submitTask, tasksList, updateList, handleTaskForm, displayForm, toggleDisplay, temporaryStorage, setTemporaryStorage} = props;
 
     return displayForm ? (
         <div className='container mt-3'>
@@ -11,6 +11,6 @@ export default function CreateTasks(props) {
             <Table tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} toggleDisplay={toggleDisplay}></Table>
         </div>
     ) : (
-        <Table tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm}></Table>
+        <Table tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} temporaryStorage={temporaryStorage} setTemporaryStorage={setTemporaryStorage}></Table>
     )
 }

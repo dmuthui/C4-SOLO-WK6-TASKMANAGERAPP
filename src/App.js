@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import CreateTasks from './Components/CreateTasks';
+import Footer from './Components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 
@@ -42,6 +43,8 @@ function App() {
     updateList(temporaryStorage)
   }
 
+
+
   //adding event listener functions for form submission
   const submitTask = (event) => {
     event.preventDefault()
@@ -58,7 +61,8 @@ function App() {
   return (
     <div className="App">
       <Navbar tasksList={tasksList} updateList={updateList} query={query} handleQuery={handleQuery} clearQuery={clearQuery}></Navbar>
-      <CreateTasks task={task} date={date} time={time} handleTask={handleTask} submitTask={submitTask} tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} displayForm={displayForm} toggleDisplay={toggleDisplay} />
+      <CreateTasks task={task} date={date} time={time} handleTask={handleTask} submitTask={submitTask} tasksList={tasksList} updateList={updateList} handleTaskForm={handleTaskForm} displayForm={displayForm} toggleDisplay={toggleDisplay} temporaryStorage={temporaryStorage} setTemporaryStorage={setTemporaryStorage}/>
+      <Footer></Footer>
     </div>
   );
 }
