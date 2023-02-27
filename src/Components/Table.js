@@ -18,10 +18,10 @@ export default function Table({ tasksList, updateList, handleTaskForm, toggleDis
                 {tasksList.map((task) => <ListTasks key={task.id} counter={task.id} task={task.task} date={task.date} time={task.time} tasksList={tasksList} updateList={updateList}></ListTasks>)}
             </tbody>
         </table> 
-        : 
-        <div id="messageHolder" className={toggleDisplay}>
-            <h1 className="my-5 lead display-1">You currently have no tasks scheduled!</h1>
-            <button onClick={()=>{handleTaskForm()}} type="button" className="btn btn-lg btn-dark toggleForm">Add Tasks <FaPlus className="my-2"/></button>
+        :
+        <div className={toggleDisplay}>
+            <h1 className="my-5 lead display-1">You currently have <br/>no tasks <br/>scheduled!</h1>
+            <button onClick={()=>{handleTaskForm()}} type="button" className="btn btn-lg btn-dark">Add Tasks <FaPlus className="my-2"/></button>
         </div>
     )
 }
