@@ -33,7 +33,6 @@ function App() {
 
   const handleQuery = (event) => {
     setQuery(event.target.value);
-    console.log(event)
     updateList(tasksList.filter(task => ((task.task).toLowerCase()).includes(query.toLowerCase())))
    
   }
